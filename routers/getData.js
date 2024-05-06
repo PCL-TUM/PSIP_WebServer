@@ -14,7 +14,7 @@ router.post("/DataPacel", async function (req, res) {
         if (DataPacel.length > 0) {
           res.json({ status: "Succeed", data: DataPacel });
         } else {
-          res.json({ status: "Failed", data: "No user information" });
+          res.json({ status: "Failed", data: "No Pacel information" });
         }
       } else {
         res.json({ status: "Failed", data: "Error" });
