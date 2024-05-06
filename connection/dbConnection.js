@@ -1,11 +1,11 @@
 var mysql = require("mysql");
 
-// localhost DB
+// localhost database
 var db = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "project",
-  database: "db_be",
+  database: "db_psip",
 });
 
 module.exports = db;
