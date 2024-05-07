@@ -2,12 +2,12 @@ const express = require("express");
 const router = express.Router();
 const setData = require("../models/setData");
 
-router.post("/DataPacel", async function (req, res) {
+router.post("/setDataPacel", async function (req, res) {
     let pacel = req.body.pacel;
     let DataPacel;
     
     if (pacel != "") {
-        DataPacel = await setData.setDataParcel();
+        DataPacel = await setDataParcel(pacel);
     }
 
     if (DataPacel != null) {
@@ -20,3 +20,21 @@ router.post("/DataPacel", async function (req, res) {
         res.json({ status: "Failed", data: "Error" });
       }
 });
+
+async function setDataPacel(pacel) {
+    return new Promise((resolve, reject) => {
+      try {
+        setData.setDataPacel(data, (err, rows) => {
+          if (err) {
+            console.log(err);
+            resolve(null);
+          } else {
+            resolve(true);
+          }
+        });
+      } catch (err) {
+        console.log(err);
+        resolve(null);
+      }
+    });
+  }

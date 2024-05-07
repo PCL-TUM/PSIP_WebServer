@@ -7,7 +7,7 @@ router.post("/DataPacel", async function (req, res) {
     let DataPacel;
     
     if (pacel != "") {
-        DataPacel = await getData.getDataParcel();
+        DataPacel = await getDataParcel(pacel);
     }
 
     if (DataPacel != null) {
@@ -20,3 +20,20 @@ router.post("/DataPacel", async function (req, res) {
         res.json({ status: "Failed", data: "Error" });
       }
 });
+
+async function getDataParcel(pacel) {
+  return new Promise((pacel, reject) => {
+    try {
+      getData.getDataParcel(pacel, (err, rows) => {
+        if (rows != null) {
+          resolve(rows);
+        } else {
+          resolve(null);
+        }
+      });
+    } catch (err) {
+      console.log(err);
+      resolve(null);
+    }
+  });
+}
