@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const getData = require("../models/getData");
+const setData = require("../models/deleteData");
 
-router.post("/getDataPacel", async function (req, res) {
+router.post("/deleteDataPacel", async function (req, res) {
   let pacel = req.body.pacel;
   let DataPacel;
 
   if (pacel != "") {
-    DataPacel = await getDataParcel(pacel);
+    DataPacel = await deleteDataPacel(pacel);
   }
 
   if (DataPacel != null) {
@@ -21,14 +21,15 @@ router.post("/getDataPacel", async function (req, res) {
   }
 });
 
-async function getDataParcel(pacel) {
-  return new Promise((pacel, reject) => {
+async function deleteDataPacel(pacel) {
+  return new Promise((resolve, reject) => {
     try {
-      getData.getDataParcel(pacel, (err, rows) => {
-        if (rows != null) {
-          resolve(rows);
-        } else {
+      deleteData.deleteDataPacel(data, (err, rows) => {
+        if (err) {
+          console.log(err);
           resolve(null);
+        } else {
+          resolve(true);
         }
       });
     } catch (err) {
