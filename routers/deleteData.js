@@ -2,29 +2,29 @@ const express = require("express");
 const router = express.Router();
 const setData = require("../models/deleteData");
 
-router.post("/deleteDataPacel", async function (req, res) {
-  let pacel = req.body.pacel;
-  let DataPacel;
+router.post("/deleteDataParcel", async function (req, res) {
+  let parcel = req.body.parcel;
+  let DataParcel;
 
-  if (pacel != "") {
-    DataPacel = await deleteDataPacel(pacel);
+  if (parcel != "") {
+    DataParcel = await deleteDataParcel(parcel);
   }
 
-  if (DataPacel != null) {
-    if (DataPacel.length > 0) {
-      res.json({ status: "Succeed", data: DataPacel });
+  if (DataParcel != null) {
+    if (DataParcel.length > 0) {
+      res.json({ status: "Succeed", data: DataParcel });
     } else {
-      res.json({ status: "Failed", data: "No Pacel information" });
+      res.json({ status: "Failed", data: "No Parcel information" });
     }
   } else {
     res.json({ status: "Failed", data: "Error" });
   }
 });
 
-async function deleteDataPacel(pacel) {
+async function deleteDataParcel(parcel) {
   return new Promise((resolve, reject) => {
     try {
-      deleteData.deleteDataPacel(data, (err, rows) => {
+      deleteData.deleteDataParcel(data, (err, rows) => {
         if (err) {
           console.log(err);
           resolve(null);
@@ -38,3 +38,5 @@ async function deleteDataPacel(pacel) {
     }
   });
 }
+
+module.exports = router

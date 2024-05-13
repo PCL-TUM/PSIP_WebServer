@@ -2,29 +2,26 @@ const express = require("express");
 const router = express.Router();
 const getData = require("../models/getData");
 
-router.post("/getDataPacel", async function (req, res) {
-  let pacel = req.body.pacel;
-  let DataPacel;
+router.post("/getDataParcel", async function (req, res) {
+  // let parcel = req.body.parcel;
+  let  DataParcel = await getDataParcel();
 
-  if (pacel != "") {
-    DataPacel = await getDataParcel(pacel);
-  }
-
-  if (DataPacel != null) {
-    if (DataPacel.length > 0) {
-      res.json({ status: "Succeed", data: DataPacel });
+  if (DataParcel != null) {
+    if (DataParcel.length > 0) {
+      res.json({ status: "Succeed", data: DataParcel });
     } else {
-      res.json({ status: "Failed", data: "No Pacel information" });
+      res.json({ status: "Failed", data: "No Parcel information" });
     }
   } else {
     res.json({ status: "Failed", data: "Error" });
   }
 });
 
-async function getDataParcel(pacel) {
-  return new Promise((pacel, reject) => {
+
+async function getDataParcel() {
+  return new Promise((resolve, reject) => {
     try {
-      getData.getDataParcel(pacel, (err, rows) => {
+      getData.getDataParcel((err, rows) => {
         if (rows != null) {
           resolve(rows);
         } else {
@@ -37,3 +34,5 @@ async function getDataParcel(pacel) {
     }
   });
 }
+
+module.exports = router

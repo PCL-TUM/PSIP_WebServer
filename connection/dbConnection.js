@@ -4,8 +4,8 @@ var mysql = require("mysql");
 var db = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "project",
-  database: "db_psip",
+  password: "",
+  database: "psip_database",
 });
 
 module.exports = db;

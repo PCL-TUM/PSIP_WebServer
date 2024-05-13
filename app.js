@@ -7,9 +7,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false,}));
 
 // require routes
-var setData = require("./routers/setData");
-var getData = require("./routers/getData");
-var deleteData = require("./routers/deleteData");
+const setData = require("./routers/setData");
+const getData = require("./routers/getData");
+const deleteData = require("./routers/deleteData");
 
 // use routes
 app.use("/setData", setData);
