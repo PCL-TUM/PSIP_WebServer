@@ -6,6 +6,12 @@ var getData = {
       `SELECT * FROM parcel;`, 
       callback
     );
+  },
+  getDataDepartment: function (callback) {
+    return db.query(
+      `SELECT * FROM department;`, 
+      callback
+    );
   }
 }
 
