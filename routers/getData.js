@@ -3,8 +3,15 @@ const router = express.Router();
 const getData = require("../models/getData");
 
 router.post("/getDataParcel", async function (req, res) {
-  // let parcel = req.body.parcel;
-  let  DataParcel = await getDataParcel();
+  let parcelID = req.body.parcelID;
+  let DataParcel;
+  console.log(parcelID);
+  
+  if (parcelID != undefined) {
+     DataParcel = await getSearchDataParcel(parcelID);
+  } else {
+     DataParcel = await getAllDataParcel();
+  }
 
   if (DataParcel != null) {
     if (DataParcel.length > 0) {
@@ -18,7 +25,7 @@ router.post("/getDataParcel", async function (req, res) {
 });
 
 router.post("/getDataDepartment", async function (req, res) {
-  let  DataDepartment = await getDataDepartment();
+  let  DataDepartment = await getAllDataDepartment();
 
   if (DataDepartment != null) {
     if (DataDepartment.length > 0) {
@@ -32,10 +39,10 @@ router.post("/getDataDepartment", async function (req, res) {
 });
 
 // async function get data
-async function getDataParcel() {
+async function getAllDataParcel() {
   return new Promise((resolve, reject) => {
     try {
-      getData.getDataParcel((err, rows) => {
+      getData.getAllDataParcel((err, rows) => {
         if (rows != null) {
           resolve(rows);
         } else {
@@ -49,10 +56,27 @@ async function getDataParcel() {
   });
 }
 
-async function getDataDepartment() {
+async function getSearchDataParcel(parcelID) {
   return new Promise((resolve, reject) => {
     try {
-      getData.getDataDepartment((err, rows) => {
+      getData.getSearchDataParcel(parcelID, (err, rows) => {
+        if (rows != null) {
+          resolve(rows);
+        } else {
+          resolve(null);
+        }
+      });
+    } catch (err) {
+      console.log(err);
+      resolve(null);
+    }
+  });
+}
+
+async function getAllDataDepartment() {
+  return new Promise((resolve, reject) => {
+    try {
+      getData.getAllDataDepartment((err, rows) => {
         if (rows != null) {
           resolve(rows);
         } else {
