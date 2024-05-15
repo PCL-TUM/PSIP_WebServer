@@ -9,7 +9,7 @@ var getData = {
   },
   getSearchDataParcel: function (parcelID, callback) {
     return db.query(
-      `SELECT * FROM parcel WHERE ${parcelID}`,
+      `SELECT * FROM parcel WHERE parcel.ID = ${parcelID}`,
       callback
     );
   },

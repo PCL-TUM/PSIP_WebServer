@@ -6,8 +6,8 @@ router.post("/getDataParcel", async function (req, res) {
   let parcelID = req.body.parcelID;
   let DataParcel;
   console.log(parcelID);
-  
-  if (parcelID != undefined) {
+
+  if (parcelID != "") {
      DataParcel = await getSearchDataParcel(parcelID);
   } else {
      DataParcel = await getAllDataParcel();
