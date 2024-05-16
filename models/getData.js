@@ -7,12 +7,12 @@ var getData = {
       callback
     );
   },
-  getSearchDataParcel: function (searchParcel, callback) {
-    return db.query(
-      `SELECT * FROM parcel WHERE parcel.ID = ${searchParcel}`,
-      callback
-    );
-  },
+  // getSearchDataParcel: function (searchParcel, callback) {
+  //   return db.query(
+  //     `SELECT * FROM parcel WHERE parcel.ID = ${searchParcel}`,
+  //     callback
+  //   );
+  // },
   getSearchDataParcel: function (searchParcel, callback) {
     return db.query(
       `SELECT 
