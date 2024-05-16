@@ -3,12 +3,11 @@ const router = express.Router();
 const getData = require("../models/getData");
 
 router.post("/getDataParcel", async function (req, res) {
-  let parcelID = req.body.parcelID;
+  let searchParcel = req.body.searchParcel;
   let DataParcel;
-  console.log(parcelID);
 
-  if (parcelID != "") {
-     DataParcel = await getSearchDataParcel(parcelID);
+  if (searchParcel != "") {
+     DataParcel = await getSearchDataParcel(searchParcel);
   } else {
      DataParcel = await getAllDataParcel();
   }
@@ -56,10 +55,10 @@ async function getAllDataParcel() {
   });
 }
 
-async function getSearchDataParcel(parcelID) {
+async function getSearchDataParcel(searchParcel) {
   return new Promise((resolve, reject) => {
     try {
-      getData.getSearchDataParcel(parcelID, (err, rows) => {
+      getData.getSearchDataParcel(searchParcel, (err, rows) => {
         if (rows != null) {
           resolve(rows);
         } else {
