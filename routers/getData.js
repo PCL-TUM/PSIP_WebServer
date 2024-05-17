@@ -28,7 +28,7 @@ router.post("/getDataDepartment", async function (req, res) {
   let DataDepartment;
 
   if (searchDepartment != "") {
-      DataDepartment = await getsearchDataDepartment(searchDepartment);
+      DataDepartment = await getSearchDataDepartment(searchDepartment);
   } else {
       DataDepartment = await getAllDataDepartment();
   } 
@@ -95,10 +95,10 @@ async function getAllDataDepartment() {
   });
 }
 
-async function getAllDataDepartment() {
+async function getSearchDataDepartment(searchDepartment) {
   return new Promise((resolve, reject) => {
     try {
-      getData.getSearchDataDepartment((err, rows) => {
+      getData.getSearchDataDepartment(searchDepartment, (err, rows) => {
         if (rows != null) {
           resolve(rows);
         } else {
