@@ -24,8 +24,14 @@ router.post("/getDataParcel", async function (req, res) {
 });
 
 router.post("/getDataDepartment", async function (req, res) {
-  let  DataDepartment = await getAllDataDepartment();
+  let searchDepartment = req.body.searchDepartment;
+  let DataDepartment;
 
+  if (searchDepartment != "") {
+      DataDepartment = await getsearchDataDepartment(searchDepartment);
+  } else {
+      DataDepartment = await getAllDataDepartment();
+  } 
   if (DataDepartment != null) {
     if (DataDepartment.length > 0) {
       res.json({ status: "Succeed", data: DataDepartment });
@@ -76,6 +82,23 @@ async function getAllDataDepartment() {
   return new Promise((resolve, reject) => {
     try {
       getData.getAllDataDepartment((err, rows) => {
+        if (rows != null) {
+          resolve(rows);
+        } else {
+          resolve(null);
+        }
+      });
+    } catch (err) {
+      console.log(err);
+      resolve(null);
+    }
+  });
+}
+
+async function getAllDataDepartment() {
+  return new Promise((resolve, reject) => {
+    try {
+      getData.getSearchDataDepartment((err, rows) => {
         if (rows != null) {
           resolve(rows);
         } else {
