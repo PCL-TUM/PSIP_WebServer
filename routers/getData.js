@@ -43,6 +43,26 @@ router.post("/getDataDepartment", async function (req, res) {
   }
 });
 
+router.post("/getDataAccount", async function (req, res) {
+  let searchAccount = req.body.searchAccount;
+  let DataAccount;
+
+  if (searchAccount != "") {
+      DataAccount = await getSearchDataAccount(searchAccount);
+  } else {
+      DataAccount = await getAllDataAccount();
+  } 
+  if (DataAccount != null) {
+    if (DataAccount.length > 0) {
+      res.json({ status: "Succeed", data: DataAccount });
+    } else {
+      res.json({ status: "Failed", data: "No Department information" });
+    }
+  } else {
+    res.json({ status: "Failed", data: "Error" });
+  }
+});
+
 // async function get data
 async function getAllDataParcel() {
   return new Promise((resolve, reject) => {
@@ -99,6 +119,40 @@ async function getSearchDataDepartment(searchDepartment) {
   return new Promise((resolve, reject) => {
     try {
       getData.getSearchDataDepartment(searchDepartment, (err, rows) => {
+        if (rows != null) {
+          resolve(rows);
+        } else {
+          resolve(null);
+        }
+      });
+    } catch (err) {
+      console.log(err);
+      resolve(null);
+    }
+  });
+}
+
+async function getAllDataAccount() {
+  return new Promise((resolve, reject) => {
+    try {
+      getData.getAllDataAccount((err, rows) => {
+        if (rows != null) {
+          resolve(rows);
+        } else {
+          resolve(null);
+        }
+      });
+    } catch (err) {
+      console.log(err);
+      resolve(null);
+    }
+  });
+}
+
+async function getSearchDataAccount(searchAccount) {
+  return new Promise((resolve, reject) => {
+    try {
+      getData.getSearchDataAccount(searchAccount, (err, rows) => {
         if (rows != null) {
           resolve(rows);
         } else {
