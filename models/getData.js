@@ -70,11 +70,33 @@ var getData = {
           department.KEY_WORD_EN, 
           department.CREATE_BY 
         FROM department
-        WHERE department.DEPART_NAME LIKE "%${searchDepartment}%" AND department.ACTIVE = 1;`, 
+        WHERE department.DEPART_NAME LIKE "%${searchDepartment}%" 
+        AND department.ACTIVE = 1;`, 
       callback
     );
   },
-   // end get Department -------------------------------------------------------------------------------
+  // end get Department ---------------------------------------------------------------------------------
+
+  // begin get System Account ---------------------------------------------------------------------------
+  getAllDataAccount: function (callback) {
+    return db.query(
+      `SELECT 
+          system_account.ID,
+          system_account.EMAIL,
+          system_account.FRIST_NAME,
+          system_account.LAST_NAME,
+          system_account.FRIST_NAME_EN,
+          system_account.LAST_NAME_EN,
+          department.DEPART_NAME,
+          system_account_role.NAME
+        FROM system_account
+        LEFT JOIN department ON department.ID = system_account.REQUEST_BY_SYSTEM_ACCOUNT_DEPART
+        LEFT JOIN system_account_role ON system_account_role.ID = system_account.REQUEST_BY_SYSTEM_ACCOUNT_ROLE
+        WHERE system_account.ACTIVE = 1;`, 
+      callback
+    );
+  },
+  // end get System Account ------------------------------------------------------------------------------
 }
 
 module.exports = getData;
