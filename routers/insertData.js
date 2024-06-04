@@ -5,25 +5,20 @@ const insertData = require("../models/insertData");
 router.post("/insertData", async function (req, res) {
   let insertType = req.body.insertType
   let dataResponse
-  // dataResponse = await insertDataParcel(req.body)
-  // console.log(dataResponse);
 
   switch (parseInt(insertType)) {
     case 1: {
       dataResponse = await insertDataParcel(req.body)
       break;
     }
-
     case 2: {
       dataResponse = await insertDataDepartment(req.body)
       break;
     }
-
     case 3: {
       dataResponse = await insertDataAccount(req.body)
       break;
     }
-
     default:
       res.json({ status: "Failed", data: "กำหนด Insert Type" });
       break;

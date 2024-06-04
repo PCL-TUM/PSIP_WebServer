@@ -1,40 +1,89 @@
 const express = require("express");
 const router = express.Router();
-const setData = require("../models/deleteData");
+const deleteData = require("../models/deleteData");
 
-router.post("/deleteDataParcel", async function (req, res) {
-  let parcel = req.body.parcel;
-  let DataParcel;
+router.post("/deleteData", async function (req, res) {
+  let deleteType = req.body.deleteType
+  let dataResponse
 
-  if (parcel != "") {
-    DataParcel = await deleteDataParcel(parcel);
+  switch (parseInt(deleteType)) {
+    case 1: {
+      dataResponse = await deleteDataParcel(req.body)
+      break;
+    }
+    case 2: {
+      dataResponse = await deleteDataDepartment(req.body)
+      break;
+    }
+    case 3: {
+      dataResponse = await deleteDataAccount(req.body)
+      break;
+    }
+    default:
+      res.json({ status: "Failed", data: "กำหนด Delete Type" });
+      break;
   }
 
-  if (DataParcel != null) {
-    if (DataParcel.length > 0) {
-      res.json({ status: "Succeed", data: DataParcel });
-    } else {
-      res.json({ status: "Failed", data: "No Parcel information" });
-    }
+  if (typeof dataResponse != "boolean") {
+    res.json({ status: "Failed", data: dataResponse });
+  } else if (dataResponse) {
+    res.json({ status: "Succeed", data: "Delete data successfully" });
   } else {
     res.json({ status: "Failed", data: "Error" });
   }
+ 
 });
 
-async function deleteDataParcel(parcel) {
+async function deleteDataParcel(data) {
   return new Promise((resolve, reject) => {
     try {
       deleteData.deleteDataParcel(data, (err, rows) => {
         if (err) {
           console.log(err);
-          resolve(null);
+          resolve(false);
         } else {
           resolve(true);
         }
       });
     } catch (err) {
       console.log(err);
-      resolve(null);
+      resolve(false);
+    }
+  });
+}
+
+async function deleteDataDepartment(data) {
+  return new Promise((resolve, reject) => {
+    try {
+      deleteData.deleteDataDepartment(data, (err, rows) => {
+        if (err) {
+          console.log(err);
+          resolve(false);
+        } else {
+          resolve(true);
+        }
+      });
+    } catch (err) {
+      console.log(err);
+      resolve(false);
+    }
+  });
+}
+
+async function deleteDataAccount(data) {
+  return new Promise((resolve, reject) => {
+    try {
+      deleteData.deleteDataAccount(data, (err, rows) => {
+        if (err) {
+          console.log(err);
+          resolve(false);
+        } else {
+          resolve(true);
+        }
+      });
+    } catch (err) {
+      console.log(err);
+      resolve(false);
     }
   });
 }
