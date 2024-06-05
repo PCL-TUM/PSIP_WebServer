@@ -30,7 +30,7 @@ var insertData = {
         modify_date,
       ],
       callback
-    )
+    );
   },
 
   insertDataDepartment: function (data, callback) {
@@ -54,7 +54,7 @@ var insertData = {
         modify_date,
       ],
       callback
-    )
+    );
   },
 
   insertDataAccount: function (data, callback) {
@@ -88,7 +88,7 @@ var insertData = {
         modify_date,
       ],
       callback
-    )
+    );
   },
 }
 

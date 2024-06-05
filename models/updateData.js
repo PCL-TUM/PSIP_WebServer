@@ -27,7 +27,7 @@ var updateData = {
         id,
       ],
       callback
-    )
+    );
   },
 
   updateDataDepartment: function (data, callback) {
@@ -54,7 +54,7 @@ var updateData = {
         id,
       ],
       callback
-    )
+    );
   },
 
   updateDataAccount: function (data, callback) {
@@ -87,7 +87,7 @@ var updateData = {
         id,
       ],
       callback
-    )
+    );
   },
 
   updateConfirmParcel: function (data, callback) {
@@ -105,7 +105,7 @@ var updateData = {
         id,
       ],
       callback
-    )
+    );
   },
 
 }

@@ -11,12 +11,14 @@ const getData = require("./routers/getData");
 const insertData = require("./routers/insertData");
 const updateData = require("./routers/updateData");
 const deleteData = require("./routers/deleteData");
+const singin = require("./routers/signin");
 
 // use routes
 app.use("/getData", getData);
 app.use("/insertData", insertData);
 app.use("/updateData", updateData);
 app.use("/deleteData", deleteData);
+app.use("/login", singin);
 
 // default route
 app.get("/", (req, res) => {
