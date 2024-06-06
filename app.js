@@ -12,6 +12,7 @@ const insertData = require("./routers/insertData");
 const updateData = require("./routers/updateData");
 const deleteData = require("./routers/deleteData");
 const singin = require("./routers/signin");
+const upload = require("./routers/uploadFile");
 
 // use routes
 app.use("/getData", getData);
@@ -19,6 +20,7 @@ app.use("/insertData", insertData);
 app.use("/updateData", updateData);
 app.use("/deleteData", deleteData);
 app.use("/login", singin);
+app.use("/upload", upload);
 
 // default route
 app.get("/", (req, res) => {
