@@ -32,8 +32,6 @@ var updateData = {
 
   updateDataDepartment: function (data, callback) {
     let depart_name = data.depart_name; 
-    let key_word = data.key_word;
-    let key_word_en = data.key_word_en;
     let create_by = data.create_by;
     let create_date = data.create_date;
     let modify_date = data.modify_date;
@@ -41,12 +39,10 @@ var updateData = {
 
     return db.query(
       `UPDATE department 
-       SET DEPART_NAME = ?, KEY_WORD = ?, KEY_WORD_EN = ?, CREATE_BY = ?, CREATE_DATE = ?, ACTIVE = ?, MODIFY_DATE = ?
+       SET DEPART_NAME = ?, CREATE_BY = ?, CREATE_DATE = ?, ACTIVE = ?, MODIFY_DATE = ?
        WHERE id = ?`,
       [
         depart_name,
-        key_word,
-        key_word_en,
         create_by,
         create_date,
         1,
