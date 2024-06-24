@@ -2,6 +2,22 @@ const express = require("express");
 const router = express.Router();
 const getData = require("../models/getData");
 
+
+router.post("/getDataParcel/:id", async function (req, res) {
+  let IdParcel = req.params.id;
+  let DataParcel = await getByIdDataParcel(IdParcel);
+
+  if (DataParcel != null) {
+    if (DataParcel.length > 0) {
+      res.json({ status: "Succeed", data: DataParcel });
+    } else {
+      res.json({ status: "Failed", data: "No Parcel information" });
+    }
+  } else {
+    res.json({ status: "Failed", data: "Error" });
+  }
+});
+
 router.post("/getDataParcel", async function (req, res) {
   let searchParcel = req.body.searchParcel;
   let DataParcel;
@@ -23,6 +39,21 @@ router.post("/getDataParcel", async function (req, res) {
   }
 });
 
+router.post("/getDataDepartment/:id", async function (req, res) {
+  let IdDepartment = req.params.id;
+  let DataDepartment = await getByIdDataDepartment(IdDepartment);
+
+  if (DataDepartment != null) {
+    if (DataDepartment.length > 0) {
+      res.json({ status: "Succeed", data: DataDepartment });
+    } else {
+      res.json({ status: "Failed", data: "No Department information" });
+    }
+  } else {
+    res.json({ status: "Failed", data: "Error" });
+  }
+});
+
 router.post("/getDataDepartment", async function (req, res) {
   let searchDepartment = req.body.searchDepartment;
   let DataDepartment;
@@ -37,6 +68,21 @@ router.post("/getDataDepartment", async function (req, res) {
       res.json({ status: "Succeed", data: DataDepartment });
     } else {
       res.json({ status: "Failed", data: "No Department information" });
+    }
+  } else {
+    res.json({ status: "Failed", data: "Error" });
+  }
+});
+
+router.post("/getDataAccount/:id", async function (req, res) {
+  let IdAccount = req.params.id;
+  let DataAccount = await getByIdDataAccount(IdAccount);
+
+  if (DataAccount != null) {
+    if (DataAccount.length > 0) {
+      res.json({ status: "Succeed", data: DataAccount });
+    } else {
+      res.json({ status: "Failed", data: "No Account information" });
     }
   } else {
     res.json({ status: "Failed", data: "Error" });
@@ -64,6 +110,23 @@ router.post("/getDataAccount", async function (req, res) {
 });
 
 // async function get data
+async function getByIdDataParcel(IdParcel) {
+  return new Promise((resolve, reject) => {
+    try {
+      getData.getByIdDataParcel(IdParcel, (err, rows) => {
+        if (rows != null) {
+          resolve(rows);
+        } else {
+          resolve(null);
+        }
+      });
+    } catch (err) {
+      console.log(err);
+      resolve(null);
+    }
+  });
+}
+
 async function getAllDataParcel() {
   return new Promise((resolve, reject) => {
     try {
@@ -98,6 +161,23 @@ async function getSearchDataParcel(searchParcel) {
   });
 }
 
+async function getByIdDataDepartment(IdDepartment) {
+  return new Promise((resolve, reject) => {
+    try {
+      getData.getByIdDataDepartment(IdDepartment, (err, rows) => {
+        if (rows != null) {
+          resolve(rows);
+        } else {
+          resolve(null);
+        }
+      });
+    } catch (err) {
+      console.log(err);
+      resolve(null);
+    }
+  });
+}
+
 async function getAllDataDepartment() {
   return new Promise((resolve, reject) => {
     try {
@@ -119,6 +199,23 @@ async function getSearchDataDepartment(searchDepartment) {
   return new Promise((resolve, reject) => {
     try {
       getData.getSearchDataDepartment(searchDepartment, (err, rows) => {
+        if (rows != null) {
+          resolve(rows);
+        } else {
+          resolve(null);
+        }
+      });
+    } catch (err) {
+      console.log(err);
+      resolve(null);
+    }
+  });
+}
+
+async function getByIdDataAccount(IdAccount) {
+  return new Promise((resolve, reject) => {
+    try {
+      getData.getByIdDataAccount(IdAccount, (err, rows) => {
         if (rows != null) {
           resolve(rows);
         } else {
